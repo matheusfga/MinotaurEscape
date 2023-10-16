@@ -1,4 +1,6 @@
-# Using Random Prim Algorithm to create a random maze, with a guaranteed solution
+# Usando o Algoritmo de Prim num grafo conectado não-direcionado de pesos aleatórios, forma-se uma MST diferente a cada vez que roda o algoritmo
+# Depois, usando uma biblioteca de processamento de imagens para colorir o grafo, a MST gerada assemelha-se à um labirinto
+# Autor: Matheus Oliveira
 
 from PIL import Image, ImageColor
 import numpy as np
@@ -9,26 +11,26 @@ class Maze:
         self._width = width
         self._height = height
         self.grid = np.zeros((width, height), dtype=bool)
-        # Por gerar uma matriz de zeros do tipo bool, gera-se uma matriz com todos as células com valor false, o que indica,
-        # nesse código, que todas as células são uma barreira do labirinto no início. true sendo reservado para passagens.
+        # Gera-se uma matriz com todos as células com valor False, o que indica
+        # que todas as células são uma barreira do labirinto no início. Troca para True quando a célula se tornar passagem.
 
         start, end = self.generate()
         self.create_image(start, end)
+        print("Novo labirinto criado em ./assets/maze.jpg")
 
     # Explicação do Algoritmo:
     # Primeiro passo: escolha um nó qualquer como ponto de partida e o marque como passagem (ou seja, mude seu valor na matriz para true)
-    # Segundo passo: crie uma lista com todas as fronteiras do nó atual, isso é, todos os nós dentro do grid que estejam marcados 
+    # Segundo passo: crie uma lista com todas as fronteiras do nó atual (lista de candidatos no Prim), isso é, todos os nós dentro do grid que estejam marcados 
         # como barriera (valor false na matriz), e que estejam a distância 2 do nó atual (a distancia serve para a formação correta do labirinto, visto que
         # cada célula pode ser ou uma passagem ou uma barreira)
     # Terceiro passo: enquanto a lista de fronteiras não estiver vazia:
-        # escolhe um nó aleatório da lista de fronteiras e o marque como passagem
+        # escolhe um nó aleatório da lista de fronteiras e o marque como passagem (esse nó aleatório seria como o nó com a aresta de menor peso em Prim)
         # escolha um vizinho qualquer desse nó:
             # um vizinho é qualquer nó a distancia 2, que esteja marcado como passagem
         # conecte o nó atual com esse vizinho, por marcar a célula entre eles como passagem
         # coloque todas as fronteiras do nó atual na lista de fronteiras e retire o nó atual dessa lista
 
     def frontiers(self, x, y):
-        # TODO: improve ifs so its not leaking from the grid
         frontier_list = []
         
         if x + 2 < self._width and not self.grid[x + 2, y]:
@@ -42,8 +44,8 @@ class Maze:
 
         return frontier_list
 
+
     def neighbor(self, x, y):
-        # TODO: improve ifs so its not leaking from the grid
         neighbor_list = []
         
         if x + 2 < self._width and self.grid[x + 2, y]:
@@ -57,8 +59,9 @@ class Maze:
         
         return neighbor_list[random.randint(0, len(neighbor_list) - 1)]
 
+
     def connect(self, x, y):
-        # Receives the frontier being examined as x, y
+        # Recebe a fronteira(candidato) sendo computado como x, y
         to_be_connected = self.neighbor(x, y)
         bridge_x = int(((x - to_be_connected[0]) / 2) + to_be_connected[0])
         bridge_y = int(((y - to_be_connected[1]) / 2) + to_be_connected[1])
@@ -88,11 +91,8 @@ class Maze:
             end = chosen_node
 
         return starting_node, end
-        # Way to keep all the frontier_lists -> Call for frontier appending
-        # Choose random but appropriate starting point
-        # Choose an ending point, possibly the last passage to be added
-        # Keep track of frontier_lists access, to make sure each frontier is computed 
-
+        
+        
     def create_image(self, start, end):
         img = Image.new('RGB', (self._width, self._height))
         pixels = img.load()
