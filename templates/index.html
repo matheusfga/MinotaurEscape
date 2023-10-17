@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+    <title>Minotaur Escape</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div id="maze-container">
+            <img id="maze" src="{{ url_for('static', filename='assets/maze.jpg') }}">
+        </div>
+        <div id="minotaur-container">
+            <img id="minotaur" src="{{ url_for('static', filename='assets/minotaur.gif') }}">
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}

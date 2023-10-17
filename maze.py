@@ -16,7 +16,7 @@ class Maze:
 
         start, end = self.generate()
         self.create_image(start, end)
-        print("Novo labirinto criado em ./assets/maze.jpg")
+        print("Novo labirinto criado em .static/assets/maze.jpg")
 
     # Explicação do Algoritmo:
     # Primeiro passo: escolha um nó qualquer como ponto de partida e o marque como passagem (ou seja, mude seu valor na matriz para true)
@@ -107,7 +107,7 @@ class Maze:
         pixels[end] = (222, 18, 18)
         newsize = (self._width * 40, self._height * 40)
         img = img.resize(newsize, resample=Image.BOX)
-        img.save("assets/maze.jpg")
+        img.save("static/assets/maze.jpg")
 
 def main():
     maze = Maze()
