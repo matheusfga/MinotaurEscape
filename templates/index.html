@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block body %}
+    <script>
+        var start_position = {{ start|tojson }};
+    </script>
     <div class="container">
         <div id="maze-container">
             <img id="maze" src="{{ url_for('static', filename='assets/maze.jpg') }}">

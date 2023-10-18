@@ -2,20 +2,21 @@
 # Depois, usando uma biblioteca de processamento de imagens para colorir o grafo, a MST gerada assemelha-se à um labirinto
 # Autor: Matheus Oliveira
 
-from PIL import Image, ImageColor
+from PIL import Image
 import numpy as np
 import random
 
 class Maze:
+    start = (0, 0)
+    end = (0, 0)
     def __init__(self, width = 31, height = 15):
         self._width = width
         self._height = height
         self.grid = np.zeros((width, height), dtype=bool)
         # Gera-se uma matriz com todos as células com valor False, o que indica
         # que todas as células são uma barreira do labirinto no início. Troca para True quando a célula se tornar passagem.
-
-        start, end = self.generate()
-        self.create_image(start, end)
+        Maze.start, Maze.end = self.generate()
+        self.create_image(Maze.start, Maze.end)
         print("Novo labirinto criado em .static/assets/maze.jpg")
 
     # Explicação do Algoritmo:
@@ -72,7 +73,7 @@ class Maze:
 
 
     def generate(self):
-        starting_node = (1, random.randint(1, self._height - 2))
+        starting_node = (1, random.randrange(1, self._height - 1, step=2))
         self.grid[starting_node] = True
         all_frontiers_set = set()
         all_frontiers_set = all_frontiers_set.union(self.frontiers(*starting_node))
@@ -119,6 +120,7 @@ def main():
     # pass_frontier = frontiers[random.randint(0, 3)]
     # print(pass_frontier)
     # print(pass_frontier[1])
+    # print(maze.start, maze.end)
 
 
 if __name__ == "__main__":
