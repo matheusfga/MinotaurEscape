@@ -1,45 +1,45 @@
-**!! Atenção: Renomeie o seu repositório para (Tema)_(NomeDoProjeto). !!** 
-
-Temas:
- - Grafos1
- - Grafos2
- - PD
- - D&C
- - Greed
- - Final 
- 
- **!! *Não coloque os nomes dos alunos no título do repositório*. Exemplo de título correto: Grafos2_Labirinto-do-Minotauro !!**
- 
- (Apague essa seção)
-
-# NomedoProjeto
+# Minotaur Escape
 
 **Número da Lista**: X<br>
-**Conteúdo da Disciplina**: XXXXXXXXXX<br>
+**Conteúdo da Disciplina**: Grafos2<br>
 
 ## Alunos
 |Matrícula | Aluno |
 | -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 190058587  |  Matheus Raphael Soares de Oliveira |
 
 ## Sobre 
-Descreva os objetivos do seu projeto e como ele funciona. 
+Esse projeto gera um novo labirinto cada vez que é conectado, com uma solução garantida, através do uso do algoritmo de Prim, o que faz do labirinto essencialmente uma MST. Juntamente com a micro framework Flask, transformamos esse labirinto num joguinho, onde o Minotauro deve percorrer o labirinto até chegar em sua saída.
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+
+![Imagem do labirinto](static/assets/maze.jpg)
+<p align=center>
+    <img src="static/assets/minotaur.gif" alt="Minotaurinho"/>
+</p>
+
+![Screenshot](gameplay.png)
 
 ## Instalação 
-**Linguagem**: xxxxxx<br>
-**Framework**: (caso exista)<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
+**Linguagem**: Python, HTML e CSS, JavaScript<br>
+**Framework**: Flask<br>
+
+Pré-requisitos para rodar o seu projeto e os comandos necessários:
+
+    $ pip install -r requirements.txt
+
+Para rodar apenas o algoritmo de Prim e gerar o JPEG de um labirinto:
+
+    $ python3 maze.py
+
+Para rodar o projeto no browser:
+
+    $ flask run
+    // ou
+    $ python app.py
 
 ## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
 
-## Outros 
-Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
-
-
+Após o server do Flask iniciar, abra o projeto em localhost:5000
 
 
